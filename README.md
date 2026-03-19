@@ -1,4 +1,4 @@
-# net-stack
+# HTTP server in C
 
 An HTTP/1.1 server built from scratch in C, on top of raw TCP sockets.
 No frameworks. No external libraries.
