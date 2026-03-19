@@ -1,7 +1,8 @@
 #include "../Include/server.h"
 #include <stdio.h>
 #include <stdlib.h>
-struct Server server_constructor(int domain, int service, int protocol, u_long interface, int port, int backlog, void (*launch) (struct Server * server)){
+#include "../Include/routes.h"
+struct Server server_constructor(int domain, int service, int protocol, u_long interface, int port, int backlog, void (*launch) (struct Server * server, routes * r)){
     struct Server server;
     server.domain = domain;
     server.service = service;

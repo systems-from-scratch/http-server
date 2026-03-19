@@ -3,7 +3,7 @@
 
 #include <sys/socket.h>
 #include <netinet/in.h>
-
+#include "routes.h"
 struct Server
 {
     int domain;
@@ -15,12 +15,12 @@ struct Server
 
     struct sockaddr_in address;
 
-    void (*launch)(struct Server * server);
+    void (*launch)(struct Server * server,routes *r);
 
     int socket;
 };
 
 struct Server server_constructor(int domain, int service, int protocol,
-                                  u_long interface, int port, int backlog, void (*launch)(struct Server * server));
+                                  u_long interface, int port, int backlog, void (*launch)(struct Server * server,routes* r));
 
 #endif /* Server_h */
