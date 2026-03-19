@@ -14,7 +14,7 @@ routes* add_routes(routes * routelist,int method, char* uri, char * (handler)(st
     if (routelist->capacity==routelist->count){
         routes * newlist = create_routes(routelist->capacity*2);
         newlist->count = routelist->count;
-        for (size_t i = 0; i < routelist->count; i++)
+        for (int i = 0; i < routelist->count; i++)
         {
             newlist->routes[i] = routelist->routes[i] ;
         }
@@ -29,11 +29,12 @@ routes* add_routes(routes * routelist,int method, char* uri, char * (handler)(st
 }
 
 void router_dispatch(routes * r, int socket,struct httprequest *req){
-    for (size_t i = 0; i < r->count; i++)
+    for (int i = 0; i < r->count; i++)
     {
         if (r->routes[i].method==req->method && (strcmp(r->routes[i].uri,req->URI)==0)){
             char * response = r->routes[i].handler(req);
             write(socket,response,strlen(response));
+            free(response);
             return;
         }
     }
@@ -44,6 +45,7 @@ void router_dispatch(routes * r, int socket,struct httprequest *req){
         "\r\n"
         "404 - Not Found";
     write(socket,response,strlen(response));
+    // free(response);
     return;
     }
 

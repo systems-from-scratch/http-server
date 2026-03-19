@@ -1,9 +1,11 @@
 #include "Include/server.h"
 #include "Include/httprequest.h"
+#include "Include/httpresponse.h"
 #include "Include/routes.h"
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 #define BUFFER_SIZE 30000
 
@@ -19,19 +21,25 @@ const char* method_to_str(int method) {
 }
 
 char* handle_index(struct httprequest *req) {
-    return "HTTP/1.1 200 OK\r\n"
-           "Content-Type: text/html\r\n"
-           "Connection: close\r\n"
-           "\r\n"
-           "<html><body><h1>Hello, World!</h1></body></html>";
+    struct httpresponse res;
+    res.status_code = 200;
+    res.status_message = "OK";
+    res.body = "<html><body><h1>Hello, World!</h1></body></html>";
+    headers_init(&res.headers);
+    headers_add(&res.headers, "Content-Type", "text/html");
+    headers_add(&res.headers, "Connection", "keep-alive");
+    return httpresponse_build(&res);
 }
 
 char* handle_ping(struct httprequest *req) {
-    return "HTTP/1.1 200 OK\r\n"
-           "Content-Type: text/plain\r\n"
-           "Connection: close\r\n"
-           "\r\n"
-           "pong";
+    struct httpresponse res;
+    res.status_code = 200;
+    res.status_message = "OK";
+    res.body = "pong";
+    headers_init(&res.headers);
+    headers_add(&res.headers, "Content-Type", "text/plain");
+    headers_add(&res.headers, "Connection", "close");
+    return httpresponse_build(&res);
 }
 
 void launch(struct Server* server) {
@@ -39,7 +47,6 @@ void launch(struct Server* server) {
     int address_length = sizeof(server->address);
     int new_socket;
 
-    // set up router
     routes *r = create_routes(10);
     r = add_routes(r, GET, "/", handle_index);
     r = add_routes(r, GET, "/ping", handle_ping);
@@ -56,14 +63,14 @@ void launch(struct Server* server) {
             perror("accept failed");
             continue;
         }
-
+        while (1){
         memset(buffer, 0, BUFFER_SIZE);
         ssize_t bytes_read = read(new_socket, buffer, BUFFER_SIZE - 1);
 
-        if (bytes_read < 0) {
+        if (bytes_read <= 0) {
             perror("read failed");
             close(new_socket);
-            continue;
+            break;
         }
 
         struct httprequest req = http_request_constructor(buffer);
@@ -73,7 +80,11 @@ void launch(struct Server* server) {
         printf("[request] version : %.1f\n", req.httpversion);
 
         router_dispatch(r, new_socket, &req);
-        close(new_socket);
+        char * conn  = headers_get(&req.headers,"connection");
+        if (!conn || strcmp(conn, "keep-alive") != 0) break;
+    }
+
+    close(new_socket);
     }
 }
 
