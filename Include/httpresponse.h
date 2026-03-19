@@ -12,4 +12,5 @@ struct httpresponse
 };
 
 char * httpresponse_build(struct httpresponse * res);
+char * return_body(char * body);
 #endif /* httpresponse_h */

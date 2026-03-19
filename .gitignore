@@ -5,3 +5,6 @@
 !*.c
 !*.h
 !.gitignore
+!makefile
+!.html
+!.css

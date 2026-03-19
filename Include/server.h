@@ -12,7 +12,7 @@ struct Server
     u_long interface;
     int port;
     int backlog;
-
+    routes * r;
     struct sockaddr_in address;
 
     void (*launch)(struct Server * server,routes *r);
@@ -21,6 +21,8 @@ struct Server
 };
 
 struct Server server_constructor(int domain, int service, int protocol,
-                                  u_long interface, int port, int backlog, void (*launch)(struct Server * server,routes* r));
+                                  u_long interface, int port, int backlog);
+
+struct Server make_server(int port);
 
 #endif /* Server_h */

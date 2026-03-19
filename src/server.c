@@ -2,7 +2,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../Include/routes.h"
-struct Server server_constructor(int domain, int service, int protocol, u_long interface, int port, int backlog, void (*launch) (struct Server * server, routes * r)){
+#include "../Include/httprequest.h"
+#include "../Include/httpresponse.h"
+#include "../Include/client.h"
+#include <string.h>
+#include <unistd.h>
+#include <pthread.h>
+#include "../Include/render_template.h"
+#define BUFFER_SIZE 30000
+
+void launch(struct Server* server, routes *r) {
+    int address_length = sizeof(server->address);
+    int new_socket;
+    while (1) {
+        printf("\n[server] waiting for connection...\n");
+        fflush(stdout);
+
+        new_socket = accept(server->socket,
+                           (struct sockaddr*)&server->address,
+                           (socklen_t*)&address_length);
+        if (new_socket < 0) {
+            perror("accept failed");
+            continue;
+        }
+        client_args *args = malloc(sizeof(client_args));
+        args->socket = new_socket;
+        args->r = r;
+
+        pthread_t thread;
+        pthread_create(&thread, NULL, handle_client, args);
+        pthread_detach(thread);
+    }
+}
+
+struct Server server_constructor(int domain, int service, int protocol, u_long interface, int port, int backlog){
     struct Server server;
     server.domain = domain;
     server.service = service;
@@ -34,4 +67,15 @@ struct Server server_constructor(int domain, int service, int protocol, u_long i
 
 
     return server;
+}
+
+struct Server make_server(int port) {
+    return server_constructor(
+        AF_INET,      
+        SOCK_STREAM,  
+        0,            
+        INADDR_ANY,   
+        port,         
+        10        
+    );
 }
