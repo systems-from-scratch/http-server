@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
-#include "httprequest.h"
-#include "datastructures/headers.h"
+#include "../Include/httprequest.h"
+#include "../Include/headers.h"
 
 int method_select(const char *method) {
     if (!method) return -1;

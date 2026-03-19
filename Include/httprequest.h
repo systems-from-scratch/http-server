@@ -1,7 +1,6 @@
 #ifndef httprequest_h
 #define httprequest_h
-#include "datastructures/dict.h"
-#include "datastructures/headers.h"
+#include "headers.h"
 
 enum httpmethods{
     GET,
@@ -28,4 +27,5 @@ struct httprequest {
 };
 
 struct httprequest http_request_constructor(const char* request_string);
+
 #endif /* httprequest_h */
