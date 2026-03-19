@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>projects — systems-from-scratch</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <span class="nav-logo">sfs/</span>
+        <div class="nav-links">
+            <a href="/">home</a>
+            <a href="/projects" class="active">projects</a>
+            <a href="/about">about</a>
+        </div>
+    </nav>
+
+    <main class="page">
+        <div class="page-header">
+            <div class="page-tag">// repos</div>
+            <h1 class="page-title">Projects</h1>
+            <p class="page-sub">Each repo is a standalone system, built from scratch.</p>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card done">
+                <div class="project-top">
+                    <span class="project-num">01</span>
+                    <span class="project-lang">C</span>
+                </div>
+                <h2 class="project-name">algo-ds</h2>
+                <p class="project-desc">
+                    Core data structures and algorithms implemented from scratch.
+                    Dynamic arrays, linked lists, stacks, queues, BSTs, graphs,
+                    hash tables, heaps, and sorting algorithms.
+                </p>
+                <div class="project-tags">
+                    <span>data structures</span>
+                    <span>algorithms</span>
+                    <span>C</span>
+                </div>
+                <a href="https://github.com/systems-from-scratch/algo-ds" class="project-link">view repo ↗</a>
+            </div>
+
+            <div class="project-card done">
+                <div class="project-top">
+                    <span class="project-num">02</span>
+                    <span class="project-lang">C</span>
+                </div>
+                <h2 class="project-name">net-stack</h2>
+                <p class="project-desc">
+                    HTTP/1.1 server built on raw TCP sockets. Includes a request parser,
+                    dynamic router, response builder, persistent connections,
+                    concurrent clients via pthreads, and a render_template engine.
+                </p>
+                <div class="project-tags">
+                    <span>networking</span>
+                    <span>HTTP</span>
+                    <span>pthreads</span>
+                </div>
+                <a href="https://github.com/systems-from-scratch/net-stack" class="project-link">view repo ↗</a>
+            </div>
+
+            <div class="project-card wip">
+                <div class="project-top">
+                    <span class="project-num">03</span>
+                    <span class="project-lang">C++</span>
+                </div>
+                <h2 class="project-name">storage-engine</h2>
+                <p class="project-desc">
+                    LSM-tree based storage engine with write-ahead log, memtable,
+                    and SST files. Foundation for the database and KV store layers.
+                </p>
+                <div class="project-tags">
+                    <span>storage</span>
+                    <span>LSM-tree</span>
+                    <span>C++</span>
+                </div>
+                <span class="project-link muted">coming soon</span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-top">
+                    <span class="project-num">04</span>
+                    <span class="project-lang">C++</span>
+                </div>
+                <h2 class="project-name">kv-store</h2>
+                <p class="project-desc">
+                    Redis-like key-value store built on the storage engine,
+                    with Raft consensus for distributed replication.
+                </p>
+                <div class="project-tags">
+                    <span>distributed</span>
+                    <span>raft</span>
+                    <span>C++</span>
+                </div>
+                <span class="project-link muted">planned</span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-top">
+                    <span class="project-num">05</span>
+                    <span class="project-lang">C</span>
+                </div>
+                <h2 class="project-name">container-runtime</h2>
+                <p class="project-desc">
+                    Minimal container runtime using Linux namespaces and cgroups.
+                    Process isolation without Docker.
+                </p>
+                <div class="project-tags">
+                    <span>containers</span>
+                    <span>linux</span>
+                    <span>C</span>
+                </div>
+                <span class="project-link muted">planned</span>
+            </div>
+
+            <div class="project-card">
+                <div class="project-top">
+                    <span class="project-num">06</span>
+                    <span class="project-lang">C++</span>
+                </div>
+                <h2 class="project-name">nn-engine</h2>
+                <p class="project-desc">
+                    Neural network inference engine with tensor ops, autograd,
+                    and a minimal training runtime. No PyTorch, no NumPy.
+                </p>
+                <div class="project-tags">
+                    <span>ML</span>
+                    <span>autograd</span>
+                    <span>C++</span>
+                </div>
+                <span class="project-link muted">planned</span>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <span>systems-from-scratch</span>
+        <span>built with the net-stack server</span>
+    </footer>
+</body>
+</html>

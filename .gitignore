@@ -6,5 +6,6 @@
 !*.h
 !.gitignore
 !makefile
-!.html
+!/templates/*.html
+!*.md
 !.css

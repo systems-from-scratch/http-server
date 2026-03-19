@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about — systems-from-scratch</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <span class="nav-logo">sfs/</span>
+        <div class="nav-links">
+            <a href="/">home</a>
+            <a href="/projects">projects</a>
+            <a href="/about" class="active">about</a>
+        </div>
+    </nav>
+
+    <main class="page">
+        <div class="page-header">
+            <div class="page-tag">// readme</div>
+            <h1 class="page-title">About</h1>
+        </div>
+
+        <div class="about-body">
+            <div class="about-block">
+                <div class="about-label">// why</div>
+                <p>
+                    Most engineers use databases, servers, and runtimes as black boxes.
+                    This project exists to open them up — to understand not just how to use
+                    these systems, but how they actually work at every layer.
+                </p>
+                <p>
+                    Every component is built from scratch in C or C++, with no external
+                    libraries where avoidable. The goal is deep understanding, not shortcuts.
+                </p>
+            </div>
+
+            <div class="about-block">
+                <div class="about-label">// principles</div>
+                <div class="principles">
+                    <div class="principle">
+                        <span class="p-num">01</span>
+                        <span class="p-text">Build it before you use it</span>
+                    </div>
+                    <div class="principle">
+                        <span class="p-num">02</span>
+                        <span class="p-text">Every component must talk to another</span>
+                    </div>
+                    <div class="principle">
+                        <span class="p-num">03</span>
+                        <span class="p-text">Measure everything — benchmarks or it didn't happen</span>
+                    </div>
+                    <div class="principle">
+                        <span class="p-num">04</span>
+                        <span class="p-text">Write about what you build</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-block">
+                <div class="about-label">// stack</div>
+                <p>
+                    Primary languages are C and C++. C for low-level systems work
+                    (networking, containers), C++ for engines and data structures
+                    where RAII and templates help without hiding complexity.
+                </p>
+            </div>
+
+            <div class="about-block">
+                <div class="about-label">// this site</div>
+                <p>
+                    This website is served by <a href="/projects">net-stack</a> —
+                    the HTTP server built as part of this project. No nginx, no Apache.
+                    Raw TCP sockets, a hand-written HTTP parser, and a render_template
+                    engine, all in C.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <span>systems-from-scratch</span>
+        <span>built with the net-stack server</span>
+    </footer>
+</body>
+</html>
